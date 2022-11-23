@@ -1,0 +1,4 @@
+.content{
+  min-height: calc(100vh - 76px - 56px - 30px);
+  height: auto;
+}

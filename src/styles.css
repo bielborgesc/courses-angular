@@ -1,1 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300&family=Staatliches&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
+
+:root {
+  --color-red: #ea1d2c;
+  --color-blue: #004DA3;
+  --color-green: #00643C;
+  --color-black: #0B090A;
+  --color-white: #F5F3F4;
+}
+
+.title-font{
+  font-family: 'Staatliches', cursive;
+}
+
+.text-font{
+  font-family: 'Sarabun', sans-serif;
+}
+
+body{
+  background-color: var(--color-white);
+}

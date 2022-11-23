@@ -1,0 +1,70 @@
+<div class="login">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card border-0 shadow rounded-3 my-5">
+          <div class="card-body p-4 p-sm-5">
+            <h2 class="card-title text-center mb-5 fw-light title-font title-form">Registrar</h2>
+            <form [formGroup]="formRegister" (ngSubmit)="create()">
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="name" formControlName="name" placeholder="Seu Nome" [ngClass]="setCssErro('name')">
+                <app-msg-validation-error
+                  [showError]="verifyValidTouched('name')"
+                  msgError="Nome é obrigatório e deve conter no minímo 3 caracteres" >
+                </app-msg-validation-error>
+                <label for="floatingInput">Nome</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="email" formControlName="email" placeholder="name@exemplo.com" [ngClass]="setCssErro('email')">
+                <app-msg-validation-error
+                  [showError]="verifyValidTouched('email')"
+                  msgError="Email é obrigatório e deve ser um email válido" >
+                </app-msg-validation-error>
+                <label for="floatingInput">Email</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="password" formControlName="password" placeholder="Senha" [ngClass]="setCssErro('password')">
+                <app-msg-validation-error
+                  [showError]="verifyValidTouched('password')"
+                  msgError="Senha é obrigatório e deve conter no mínimo 1 letra maiúscula, 1 letra maiúscula, 1 número e um caractere especial" >
+                </app-msg-validation-error>
+                <label for="password">Senha</label>
+              </div>
+              <div class="col-sm-10">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio"  formControlName="profession" id="gridRadios1" value="professor">
+                  <label class="form-check-label" for="gridRadios1">
+                    Professor
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" formControlName="profession" id="gridRadios2" value="aluno">
+                  <label class="form-check-label" for="gridRadios2">
+                    Aluno
+                  </label>
+                </div>
+              </div>
+              <span *ngIf="isLoading" class="p-3">
+                <div class="text-center">
+                  <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>
+              </span>
+              <div class="d-grid" *ngIf="!isLoading">
+                <div class="d-grid">
+                  <button class="btn btn-outline-primary register-btn text-uppercase fw-bold" type="submit">Registrar</button>
+                </div>
+              </div>
+              <br>
+              <div class="d-grid">
+                <a class="" routerLink="/login" type="button">Já tenho uma conta!</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

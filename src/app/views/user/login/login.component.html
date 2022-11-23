@@ -1,0 +1,45 @@
+<div class="login">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card border-0 shadow rounded-3 my-5">
+          <div class="card-body p-4 p-sm-5">
+            <h2 class="card-title text-center mb-5 fw-light title-font title-form">Login</h2>
+            <form [formGroup]="formLogin">
+              <div class="form-floating mb-3">
+                <input type="email"  class="form-control" id="email" formControlName="email" placeholder="name@exemplo.com" [ngClass]="setCssErro('email')">
+                <app-msg-validation-error
+                  [showError]="verifyValidTouched('email')"
+                  msgError="Esse campo é obrigatório por favor preencha!" >
+                </app-msg-validation-error>
+                <label for="email">Email</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="password" formControlName="password" placeholder="Senha" [ngClass]="setCssErro('password')">
+                <app-msg-validation-error
+                  [showError]="verifyValidTouched('password')"
+                  msgError="Esse campo é obrigatório por favor preencha!" >
+                </app-msg-validation-error>
+                <label for="password">Senha</label>
+              </div>
+              <span *ngIf="isLoading" class="p-3">
+                <div class="text-center">
+                  <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>
+              </span>
+              <div class="d-grid" *ngIf="!isLoading">
+                <button class="btn btn-outline-primary login-btn text-uppercase fw-bold" (click)="login()" type="submit">Login</button>
+              </div>
+              <br>
+              <div class="d-grid">
+                <a class="" routerLink="/registrar" type="button">Preciso de uma conta!</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

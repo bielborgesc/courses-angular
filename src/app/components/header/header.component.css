@@ -1,0 +1,39 @@
+.logo{
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.dash{
+  background-color: var(--color-blue);
+  width: 3px;
+  height: 50px;
+  margin: 0 5px;
+}
+
+.title-logo{
+  display: flex;
+  flex-direction: column;
+  font-size: 24px;
+  line-height: 20px;
+  color: var(--color-white);
+}
+
+.navbar{
+  background-color: var(--color-black);
+  box-shadow: 0 2px 7px 0 rgba(0,0,0,.5);
+}
+
+.perfil{
+  display: none;
+}
+
+button{
+  background-color: var(--color-blue);
+  color: var(--color-white);
+}
+
+button:hover{
+  background-color: var(--color-white);
+  color: var(--color-blue);
+}

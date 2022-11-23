@@ -1,0 +1,27 @@
+.title-form{
+  font-size: 40px;
+}
+
+.login button{
+  margin: 5px 0;
+}
+
+.login-btn{
+  border-color: var(--color-green);
+  color: var(--color-green)
+}
+
+.login-btn:hover{
+  color: white;
+  background-color: var(--color-green)
+}
+
+.register-btn{
+  border-color: var(--color-blue);
+  color: var(--color-blue)
+}
+
+.register-btn:hover{
+  color: white;
+  background-color: var(--color-blue)
+}
