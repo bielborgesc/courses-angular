@@ -25,6 +25,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { MsgValidationErrorComponent } from './components/msg-validation-error/msg-validation-error.component';
 import { CourseCreateComponent } from './views/courses/course-create/course-create.component';
 import { CourseCreateClassComponent } from './views/courses/course-create-class/course-create-class.component';
+import { CourseLessonListComponent } from './views/courses/course-lesson-list/course-lesson-list.component';
 registerLocaleData(localePt);
 
 @NgModule({
@@ -40,7 +41,8 @@ registerLocaleData(localePt);
     MsgValidationErrorComponent,
     CourseListComponent,
     CourseCreateComponent,
-    CourseCreateClassComponent
+    CourseCreateClassComponent,
+    CourseLessonListComponent
   ],
   imports: [
     BrowserModule,

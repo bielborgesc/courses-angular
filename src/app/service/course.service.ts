@@ -48,5 +48,16 @@ export class CourseService {
     return this.http.delete<any>(`${baseUrl}/me/teacher/courses/${courseId}/lesson/${lessonId}`);
   }
 
+  // Sevice Estudante
+
+  getCourseStudantById(courseId: number): Observable<any> {
+    return this.http.get<any>(`${baseUrlStudent}/courses/${courseId}`)
+
+  }
+
+  getLessonById(lessonId: any): Observable<any> {
+    return this.http.get<any>(`${baseUrlStudent}/courses/play/${lessonId}`)
+
+  }
 
 }

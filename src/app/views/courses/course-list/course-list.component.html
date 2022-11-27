@@ -26,6 +26,8 @@
 
             <a *ngIf="isTeacher" routerLink="/professor/curso/{{course.id}}/aulas"
               class="btn btn-primary btn-show-course">Visualizar</a>
+              <a *ngIf="!isTeacher" routerLink="/aluno/curso/{{course.id}}/aulas"
+              class="btn btn-primary btn-show-course">Visualizar</a>
           </div>
         </div>
       </div>
