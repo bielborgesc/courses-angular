@@ -16,10 +16,10 @@ export class HeaderComponent {
   constructor(
     private router: Router,
     private modalService: ModalService,
-  ) {}
+  ) { }
 
-  logout(){
-    const result$ = this.modalService.showConfirm("Confrimação", "Tem certeza que deseja sair?");
+  logout() {
+    const result$ = this.modalService.showConfirm({ title: "Confrimação", msg: "Tem certeza que deseja sair?" });
     result$.asObservable()
       .pipe(
         take(1),
@@ -33,8 +33,12 @@ export class HeaderComponent {
       .subscribe()
   }
 
-  navigateHome(){
+  navigateHome() {
     this.router.navigate(['/']);
+  }
+
+  navigateToCreateNewCourse() {
+    this.router.navigate(['/professor/novo-curso']);
   }
 
 }

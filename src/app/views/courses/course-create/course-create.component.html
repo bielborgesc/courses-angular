@@ -1,0 +1,49 @@
+<div class="container-courses container text-font mt-4">
+    <div class="title-coursess">
+        <h2 class="display-6 title-font">{{titlePage}}</h2>
+    </div>
+    <hr class="my-2">
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <form [formGroup]="formCreateUpdateCourse" (ngSubmit)="onSubmit()">
+                        <div class="form-group mb-3">
+                            <label for="courseName">Nome do curso</label>
+                            <input type="text" class="form-control ng-invalid is-invalid"
+                                [ngClass]="setCssErr('courseName')" formControlName="courseName"
+                                placeholder="Nome do Curso" aria-label="Nome do curso" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="courseDescription">Descrição</label>
+                            <textarea class="form-control" [ngClass]="setCssErr('courseDescription')"
+                                formControlName="courseDescription" placeholder="Descrição do curso"
+                                aria-label="Descrição do curso" required></textarea>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="coursePrice">Valor do curso</label>
+                            <input type="number" [ngClass]="setCssErr('coursePrice')" class="form-control"
+                                formControlName="coursePrice" placeholder="Valor do curso" aria-label="Valor do curso"
+                                required>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="courseImage">Url - Imagem principal</label>
+                            <input type="text" [ngClass]="setCssErr('courseImage')" class="form-control"
+                                formControlName="courseImage" placeholder="Url da imagem (thumbnail) do curso"
+                                aria-label="Url da imagem (thumbnail) do curso" required>
+                        </div>
+
+                        <div class="form-group mb-3 d-flex justify-content-end">
+                            <button class="btn btn-primary">Criar</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

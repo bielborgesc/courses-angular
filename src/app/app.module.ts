@@ -23,6 +23,8 @@ import { IsTeacherDirective } from './directives/isTeacher.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { MsgValidationErrorComponent } from './components/msg-validation-error/msg-validation-error.component';
+import { CourseCreateComponent } from './views/courses/course-create/course-create.component';
+import { CourseCreateClassComponent } from './views/courses/course-create-class/course-create-class.component';
 registerLocaleData(localePt);
 
 @NgModule({
@@ -36,7 +38,9 @@ registerLocaleData(localePt);
     LogoutDirective,
     IsTeacherDirective,
     MsgValidationErrorComponent,
-    CourseListComponent
+    CourseListComponent,
+    CourseCreateComponent,
+    CourseCreateClassComponent
   ],
   imports: [
     BrowserModule,

@@ -55,6 +55,7 @@ export class LoginComponent implements OnInit {
           this.isLoading = false;
         }),
         catchError(async (err) => {
+          console.log(err);
           this.toast.error({detail: "Mensagem de Erro", summary: "Credenciais incorretas", duration: 5000})
           this.isLoading = false;
         })

@@ -1,9 +1,12 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Course } from '../model/course.model';
+import { Lesson } from '../model/lesson.model';
 
-const baseUrl = 'https://backendcourse.clicoufacil.com'
+const baseUrl = 'https://backendcourse.clicoufacil.com';
+const baseUrlTeacher = 'https://backendcourse.clicoufacil.com/me/teacher';
+const baseUrlStudent = 'https://backendcourse.clicoufacil.com/me/student';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +22,31 @@ export class CourseService {
   findOneById(id: number): Observable<any> {
     return this.http.get<any>(`${baseUrl}/courses/${id}`);
   }
+
+  // courses teacher
+  findAllCoursesTeacher(): Observable<any> {
+    return this.http.get<any>(`${baseUrl}/me/teacher/courses`);
+  }
+
+  createNewCourse(course: Course): Observable<any> {
+    return this.http.post<any>(`${baseUrl}/me/teacher/courses`, course, { observe: "response" });
+  }
+
+  getCourseByTeacher(id: number): Observable<any> {
+    return this.http.get<any>(`${baseUrlTeacher}/courses/${id}`);
+  }
+
+  createNewLesson(lesson: Lesson): Observable<any> {
+    return this.http.post<any>(`${baseUrlTeacher}/courses/${lesson.course_id}/lesson`, lesson, { observe: "response" });
+  }
+
+  updateLesson(lesson: Lesson): Observable<any> {
+    return this.http.put<any>(`${baseUrlTeacher}/courses/${lesson.course_id}/lesson/${lesson.id}`, lesson, { observe: "response" });
+  }
+
+  destroyLessonCourse(courseId: number, lessonId: number): Observable<any> {
+    return this.http.delete<any>(`${baseUrl}/me/teacher/courses/${courseId}/lesson/${lessonId}`);
+  }
+
 
 }
