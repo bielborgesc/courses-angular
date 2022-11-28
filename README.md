@@ -26,7 +26,31 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
-## BACKEND 
+## Como testar
+
+[1] Crie um usuário do tipo professor, e outro usuário do tipo Aluno (emails devem ser diferentes)
+
+[2] Já existem diversos cursos cadastrados, porém, como professor, crie cursos navegando até a rota:
+    /professor/novo-curso
+
+    - Após criar o curso, insira as aulas em
+        /professor/curso/:courseId/aulas (caso não seja redirecionado automaticamente)
+
+[3] Como aluno, você pode visualizar:
+    - Todos os cursos cadastrados em:
+        pagina principal
+    - Visualizar seus cursos em:
+        /meus-cursos
+    - Comprar curso
+        /aluno/curso/:courseId/comprar
+
+    - Assistir as aulas do curso
+        /aluno/curso/:courseId/aulas
+
+    - Atenção
+        O objetivo não é fazer todo o componente de compra, e sim simular apenas um crud na tabela de relação de cursos do usuário
+
+## BACKEND
 
 :bulb: In this directory has a [Insomnia.json] file. Import it into your Insominia to test routes
 
