@@ -1,0 +1,60 @@
+<div class="container-courses container text-font mt-4">
+    <div class="title-coursess">
+        <h2 class="display-6 title-font">Compre agora o curso : {{courseSelected?.title}}</h2>
+        <p class="lead-1 text-font">Adquirir esse curso</p>
+    </div>
+    <hr class="my-2">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+
+            <div class="card p-2">
+
+                <div class="card-header">
+                    <h3 class="card-title">Comprar : {{courseSelected?.title}}</h3>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+
+                        <img  class="img-fluid mb-3" src="{{courseSelected?.image_url}}" alt="">
+                        
+
+                        <div class="col-md-12 mb-3">
+                            <span>Detalhes : {{courseSelected?.description}}</span>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <span>Professor : {{courseSelected?.teacher?.name}}</span>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <span>Aulas : {{courseSelected?.lessons?.length}} aulas</span>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <span>Valor: {{courseSelected?.price | currency : "BRL"}}</span>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <button class="btn btn-outline-primary w-100" (click)="btnBuyCourse()">Comprar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+
+        <ng-template #loading>
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>
+
+

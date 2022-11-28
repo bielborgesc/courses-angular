@@ -1,0 +1,53 @@
+<div class="container-courses container text-font mt-4">
+    <div class="title-coursess">
+      
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h2 class="display-6 title-font">{{titlePage}}</h2>
+                <p class="lead-1 text-font">{{descriptionPage}}</p>
+            </div>
+            <div class="col-md-6 d-flex justify-content-end">
+                <button class="btn btn-primary" (click) = "btnRountingHome()">Ver mais cursos</button>
+            </div>
+        </div>
+     
+
+    </div>
+    <hr class="my-2">
+    <div class="input-search-course">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+        </div>
+        <form [formGroup]="formSearch">
+          <input type="text" class="form-control input-search" formControlName="courseName" (keyup)="handleInputSearch()"
+            placeholder="Nome do Curso" aria-label="Nome do Curso" aria-describedby="basic-addon1">
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <ng-container *ngIf="courses$ | async as courses; else loading">
+        <div class="col-lg-4 col-md-6" *ngFor="let course of courses">
+          <div class="card card-margin">
+            <img class="card-img-top" src={{course.image_url}} alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{course.title}}</h5>
+              <p class="card-text description">{{course.description}}</p>
+  
+              <a *ngIf="isTeacher" routerLink="/professor/curso/{{course.id}}/aulas"
+                class="btn btn-primary btn-show-course">Visualizar</a>
+                <a *ngIf="!isTeacher" routerLink="/aluno/curso/{{course.id}}/aulas"
+                class="btn btn-primary btn-show-course">Visualizar</a>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #loading>
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>

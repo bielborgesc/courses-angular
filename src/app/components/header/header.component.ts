@@ -41,4 +41,8 @@ export class HeaderComponent {
     this.router.navigate(['/professor/novo-curso']);
   }
 
+  btnRouterCoursesSelf(){
+    this.router.navigate(["/meus-cursos"])
+  }
+
 }

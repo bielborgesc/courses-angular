@@ -57,7 +57,19 @@ export class CourseService {
 
   getLessonById(lessonId: any): Observable<any> {
     return this.http.get<any>(`${baseUrlStudent}/courses/play/${lessonId}`)
-
   }
+
+  getCourseById(courseId:number):Observable<any>{
+    return this.http.get<any>(`${baseUrl}/courses/${courseId}`);
+  }
+
+  buyCourse(courseId:number):Observable<any>{
+    return this.http.get<any>(`${baseUrlStudent}/courses/buy/${courseId}`);
+  }
+
+  findAllCoursesStudent():Observable<any>{
+    return this.http.get<any>(`${baseUrlStudent}/courses/`);
+  }
+  
 
 }

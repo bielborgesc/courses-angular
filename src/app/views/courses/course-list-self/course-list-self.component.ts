@@ -1,19 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { CourseService } from 'src/app/service/course.service';
-import { NgToastService } from 'ng-angular-popup';
-import { catchError, delay, EMPTY, finalize, Observable, of, switchMap, take, tap } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import jwtDecode from 'jwt-decode';
 import { Router } from '@angular/router';
-
+import jwtDecode from 'jwt-decode';
+import { NgToastService } from 'ng-angular-popup';
+import { catchError, EMPTY, Observable, of, tap } from 'rxjs';
+import { CourseService } from 'src/app/service/course.service';
 
 @Component({
-  selector: 'app-course-list',
-  templateUrl: './course-list.component.html',
-  styleUrls: ['./course-list.component.css']
+  selector: 'app-course-list-self',
+  templateUrl: './course-list-self.component.html',
+  styleUrls: ['./course-list-self.component.css']
 })
-export class CourseListComponent implements OnInit {
+export class CourseListSelfComponent implements OnInit {
 
+ 
   isTeacher?: boolean = false;
 
   courses$!: Observable<any>;
@@ -45,19 +45,16 @@ export class CourseListComponent implements OnInit {
   onRefresh() {
 
     // Verifica se usuário é professor ou estudante
-
-
+    this.titlePage = "Meus Cursos";
     if (!this.isTeacher) {
-      this.titlePage = "Cursos";
-      this.descriptionPage = "Lista de todos os Cursos disponíveis!";
-      this.courses$ = this.courseService.findAll().pipe(
+      this.descriptionPage = "Lista de todos os seus cursos";
+      this.courses$ = this.courseService.findAllCoursesStudent().pipe(
         catchError(async (err) => {
           this.toast.error({ detail: "Mensagem de Erro", summary: err.error.message, duration: 5000 })
           return EMPTY;
         })
       );
     } else {
-      this.titlePage = "Meus cursos";
       this.descriptionPage = "Aqui estão seus cursos divulgados!";
       this.courses$ = this.courseService.findAllCoursesTeacher().pipe(
         catchError(async (err) => {
@@ -82,11 +79,15 @@ export class CourseListComponent implements OnInit {
 
   btnAccessCourse(courseId: any) {
     if (this.isTeacher) {
-      this.router.navigate([`/professor/curso/${courseId}/aulas`]);
+      this.router.navigate([`/professor/cursos/${courseId}/aulas`]);
     } else {
-      this.router.navigate([`/aluno/curso/${courseId}/aulas`]);
+      this.router.navigate([`/aluno/cursos/${courseId}/aulas`]);
     }
+  }
 
+  btnRountingHome(){
+    this.router.navigate(["/"]);
   }
 
 }
+

@@ -26,6 +26,9 @@ import { MsgValidationErrorComponent } from './components/msg-validation-error/m
 import { CourseCreateComponent } from './views/courses/course-create/course-create.component';
 import { CourseCreateClassComponent } from './views/courses/course-create-class/course-create-class.component';
 import { CourseLessonListComponent } from './views/courses/course-lesson-list/course-lesson-list.component';
+import { CoursePurchaseComponent } from './views/courses/course-purchase/course-purchase.component';
+import { CourseListSelfComponent } from './views/courses/course-list-self/course-list-self.component';
+
 registerLocaleData(localePt);
 
 @NgModule({
@@ -42,7 +45,9 @@ registerLocaleData(localePt);
     CourseListComponent,
     CourseCreateComponent,
     CourseCreateClassComponent,
-    CourseLessonListComponent
+    CourseLessonListComponent,
+    CoursePurchaseComponent,
+    CourseListSelfComponent
   ],
   imports: [
     BrowserModule,

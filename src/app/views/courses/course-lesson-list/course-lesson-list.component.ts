@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
+import { catchError, tap } from 'rxjs';
 import { Course } from 'src/app/model/course.model';
 import { Lesson } from 'src/app/model/lesson.model';
 import { CourseService } from 'src/app/service/course.service';
@@ -16,7 +18,7 @@ export class CourseLessonListComponent implements OnInit {
   courseSelectedId?:number;
   
 
-  constructor(private courseService: CourseService, private router: Router, private route: ActivatedRoute) { 
+  constructor(private courseService: CourseService, private router: Router, private route: ActivatedRoute, private toast:NgToastService) { 
 
   }
 
@@ -24,16 +26,21 @@ export class CourseLessonListComponent implements OnInit {
     const courseParamsId = this.route.snapshot.paramMap.get("id");
     if (courseParamsId) {
       this.courseSelectedId = parseInt(courseParamsId);
-      this.courseService.getCourseStudantById(this.courseSelectedId).subscribe(response =>{
-        if (response.status == 401) {
-          console.log("Curso não Adquirido!");
-        } else if(response.status == 404) {
-          console.log("Curso inexistente!");
-        } else {
-          this.course=response;
+      this.courseService.getCourseStudantById(this.courseSelectedId).pipe(
+        tap(resultTap =>{
+        if(resultTap.id){
+          this.course=resultTap;
           this.titleCourse=this.course?.title;
         }
-      } )
+        }),catchError(async (error) => {
+          if(error.status == 401){
+            this.toast.warning({ detail: "Acesso não autorizado", summary: "Você não tem acesso ao curso", duration: 5000 })
+            this.router.navigate([`/aluno/curso/${courseParamsId}/comprar`]);
+          }else{
+            this.toast.error({ detail: "Mensagem de Erro", summary: "Erro desconhecido", duration: 5000 })
+          }         
+        })
+      ).subscribe();
     } 
     
   }
