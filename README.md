@@ -37,10 +37,13 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
         /professor/curso/:courseId/aulas (caso não seja redirecionado automaticamente)
 
 [3] Como aluno, você pode visualizar:
+
     - Todos os cursos cadastrados em:
         pagina principal
+
     - Visualizar seus cursos em:
         /meus-cursos
+
     - Comprar curso
         /aluno/curso/:courseId/comprar
 
