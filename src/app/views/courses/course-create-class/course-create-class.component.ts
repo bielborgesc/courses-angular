@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
-import { catchError, EMPTY, Observable, switchMap, take } from 'rxjs';
+import { async, catchError, EMPTY, Observable, switchMap, take, tap } from 'rxjs';
 import { Course } from 'src/app/model/course.model';
 import { Lesson } from 'src/app/model/lesson.model';
 import { CourseService } from 'src/app/service/course.service';
@@ -41,19 +41,31 @@ export class CourseCreateClassComponent implements OnInit {
     const paramId = this.route.snapshot.paramMap.get('id');
     if (paramId) {
       const courseId = parseInt(paramId);
-      this.updateLesson(courseId);
+      this.getCourse(courseId);
     }
   }
 
-  private updateLesson(courseId: number) {
-    this.courseService.getCourseByTeacher(courseId).subscribe((response) => {
-      console.log(response);
-      if (response.lessons) {
-        this.lessons = response.lessons;
-        this.course = response;
+  private getCourse(courseId: number) {
+    this.courseService.getCourseByTeacher(courseId).pipe(
+      tap(resultTap => {
+        
+        this.lessons = resultTap.lessons;
+        this.course = resultTap;
         console.log(this.lessons);
-      }
-    })
+
+      }),catchError(async (error) =>{
+        if(error.status == 401){
+          this.toast.error({ detail: "Acesso não autorizado", summary: "Você não tem permissão para editar esse curso!", duration: 5000 });
+          this.router.navigate(["/meus-cursos"]);
+        }else if(error.status == 404){
+          this.toast.error({ detail: "Curso não encontrado", summary: "Ops, parece que a url não existe...", duration: 5000 });
+          this.router.navigate(["/meus-cursos"]);
+        }else{
+          this.toast.error({ detail: "Eita...", summary: "Não consegui identificar o que houve...", duration: 5000 });
+          this.router.navigate(["/meus-cursos"]);
+        }
+      })
+    ).subscribe();
   }
 
   btnDestroyClass(lessonId: any) {
@@ -125,7 +137,7 @@ export class CourseCreateClassComponent implements OnInit {
           if (res.status == 200) {
             this.toast.success({ detail: "Aula", summary: "Aula foi atualizada com sucesso", duration: 5000 });
             if (updateLesson.course_id) {
-              this.updateLesson(updateLesson.course_id);
+              this.getCourse(updateLesson.course_id);
               this.isList = true;
             }
           } else {
@@ -187,6 +199,33 @@ export class CourseCreateClassComponent implements OnInit {
     this.formCreateUpdateClass.get('classDescription')?.setValue('')
     this.formCreateUpdateClass.get('classStep')?.setValue(0)
     this.formCreateUpdateClass.get('classUrlVideo')?.setValue('');
+  }
+
+  btnEditDataCourse(){
+    const paramId = this.route.snapshot.paramMap.get('id');
+    this.router.navigate([`/professor/editar-curso/${paramId}`]);
+  }
+
+  bntDestroyCourse(){
+    this.courseService.destroyCourse(<number>this.course.id).pipe(
+      tap(resultTap => {
+          if(resultTap){
+          this.toast.success({ detail: "Manutenção de cursos", summary: "O curso foi removido com sucesso!", duration: 5000 });
+          this.router.navigate(["/meus-cursos"]);
+          }
+      }),catchError(async (error) =>{
+        if(error.status == 401){
+          this.toast.error({ detail: "Acesso não autorizado", summary: "Você não tem permissão para excluir esse curso!", duration: 5000 });
+          this.router.navigate(["/meus-cursos"]);
+        }else if(error.status == 404){
+          this.toast.error({ detail: "Curso não encontrado", summary: "Ops, parece que a url não existe...", duration: 5000 });
+          this.router.navigate(["/meus-cursos"]);
+        }else{
+          this.toast.error({ detail: "Eita...", summary: "Não consegui identificar o que houve...", duration: 5000 });
+          this.router.navigate(["/meus-cursos"]);
+        }
+      })
+    ).subscribe();
   }
 
 }

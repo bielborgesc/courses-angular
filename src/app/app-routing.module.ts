@@ -31,6 +31,11 @@ const routes: Routes = [
     canActivate: [AuthGuardTeacherService]
   },
   {
+    path: 'professor/editar-curso/:id',
+    component: CourseCreateComponent,
+    canActivate: [AuthGuardTeacherService]
+  },
+  {
     path: 'professor/curso/:id/aulas',
     component: CourseCreateClassComponent,
     canActivate: [AuthGuardTeacherService]

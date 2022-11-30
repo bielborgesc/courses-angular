@@ -32,6 +32,14 @@ export class CourseService {
     return this.http.post<any>(`${baseUrl}/me/teacher/courses`, course, { observe: "response" });
   }
 
+  updateCourse(course: Course): Observable<any> {
+    return this.http.put<any>(`${baseUrl}/me/teacher/courses/${course.id}`, course, { observe: "response" });
+  }
+
+  destroyCourse(courseId:number):Observable<any> {
+    return this.http.delete<any>(`${baseUrl}/me/teacher/courses/${courseId}`,{ observe: "response" });
+  }
+
   getCourseByTeacher(id: number): Observable<any> {
     return this.http.get<any>(`${baseUrlTeacher}/courses/${id}`);
   }
